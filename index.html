@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0e4d7;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .button {
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            margin: 10px;
+        }
+        .yes {
+            background-color: #ff69b4;
+            color: white;
+        }
+        .no {
+            background-color: #dcdcdc;
+        }
+        #response, #gif-container {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff69b4;
+        }
+        #gif-container {
+            display: none; /* Hide the GIF initially */
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- First Page (Hi and Valentine Question) -->
+    <div id="page1">
+        <h1>Hi there! 😊</h1>
+        <p>Will you be my Valentine?</p>
+        <button class="button yes" onclick="showResponse('yes')">Yes</button>
+        <button class="button no" onclick="showResponse('no')">No</button>
+    </div>
+
+    <!-- Response after Valentine Question -->
+    <div id="response"></div>
+
+    <!-- Second Page (Message After Valentine Question) -->
+    <div id="page2" class="hidden">
+        <h1>Hey!</h1>
+        <div id="message">I really enjoy talking to you, you're the best! 😻</div>
+        <button class="button" onclick="goToPage3()">Next</button>
+    </div>
+
+    <!-- Third Page (Asking Andreea to Be Your Valentine) -->
+    <div id="page3" class="hidden">
+        <h1>Andreea, will you be my Valentine?</h1>
+        <button class="button yes" onclick="showCelebration()">Yes</button>
+        <button class="button no" onclick="showNoResponse()">No</button>
+        <div id="celebrationResponse"></div>
+        <div id="gif-container">
+            <img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="Celebration GIF" width="300">
+        </div>
+    </div>
+
+    <script>
+        function showResponse(answer) {
+            // Hide page1 and show the response message
+            document.getElementById("page1").classList.add("hidden");
+            if(answer === "yes") {
+                document.getElementById("response").innerHTML = "Yay! ❤️ You just made my day!";
+                setTimeout(function() {
+                    document.getElementById("page2").classList.remove("hidden");
+                }, 2000); // 2 seconds delay before showing page 2
+            } else {
+                document.getElementById("response").innerHTML = "Aww, that's okay! 😔 Maybe next year?";
+            }
+        }
+
+        function goToPage3() {
+            // Hide page2 and show page3
+            document.getElementById("page2").classList.add("hidden");
+            document.getElementById("page3").classList.remove("hidden");
+        }
+
+        function showCelebration() {
+            // Show celebration GIF and response when "Yes" is clicked on page3
+            document.getElementById("celebrationResponse").innerHTML = "Yay! 🎉 You're the best!";
+            document.getElementById("gif-container").style.display = "block";
+        }
+
+        function showNoResponse() {
+            // Show response when "No" is clicked on page3
+            document.getElementById("celebrationResponse").innerHTML = "That's okay, maybe next time. 😔";
+        }
+    </script>
+
+</body>
+</html>
